@@ -1,0 +1,33 @@
+<nav class='nav'>
+    <button class='btn'><a class='nav-link' href='/dashboard'>Home</a></button>
+    <button class='btn'><a class='nav-link' href='/dashboard'>Dashboard</a></button>
+    <button class='btn'><a class='nav-link' href='/homepage' id='logout' type='submit'>Log Out</a></button>
+</nav>
+
+<div class="container-lg p-3">
+
+    <h2>Dashboard</h2>
+
+    {{#each postitems as |postitem|}}
+    <div class="card p-3" style="width: 18rem;">
+        <div class="card-body">
+            <h3 class="titleData card-title" id="{{postitem.title}}">{{postitem.title}}</h3>
+            <p class="card-text contentData" id="{{postitem.post_content}}">{{postitem.post_content}}</p>
+            <p class="card-text userData">Created by {{postitem.user_id}} on {{postitem.date_created}}</p>
+            <p class="d-none idData">{{postitem.id}}</p>
+            <a href="/viewpost/{{postitem.id}}" class="card-link">View Post</a>
+            <a href="/updatepost/{{postitem.id}}" class="card-link">Update Post</a>
+            <a data-id="{{postitem.id}}" class="card-link delete-post">Delete Post</a>
+        </div>
+    </div>
+    {{/each}}
+
+    <div class="p-3">
+        <a href='/addpost'><button class='btn primary-btn' id='addpost'>New
+                Post</button></a>
+    </div>
+
+    <script src='/js/viewpost.js'></script>
+    <script src='/js/updatepost.js'></script>
+    <script src='/js/deletepost.js'></script>
+    <script src='/js/addpost.js'></script>

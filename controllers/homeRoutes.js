@@ -2,10 +2,10 @@ const router = require('express').Router();
 const { User, Post, Comment } = require('../models');
 const withAuth = require('../utils/auth');
 
-//render homepage with posts when first visiting site - no sign in required yet
 router.get('/', async (req, res) => {
     try {
         const postData = await Post.findAll({
+            attributes: ['id', 'title', 'post_content', 'date_created', 'user_id'],
             include: [{
                 model: User,
                 attributes: ['username'],
@@ -23,56 +23,6 @@ router.get('/', async (req, res) => {
     }
 });
 
-router.get('/post/:id', async (req, res) => {
-    try {
-        const postData = await Post.findByPk(req.params.id, {
-            include: [
-                {
-                    model: User,
-                    attributes: ['username'],
-                }, {
-                    model: Comment,
-                    include: [
-                        User
-                    ]
-                }
-            ],
-        });
-        const post = postData.get({
-            plain: true
-        });
-        res.render('post', {
-            ...post,
-            logged_in: req.session.logged_in
-        });
-    } catch (err) {
-        res.status(500).json(err);
-    }
-});
-
-//clicking link to dashboard prompts user to login or sign-up if not logged in
-router.get('/dashboard', withAuth, async (req, res) => {
-    try {
-        const userData = await User.findByPk(req.session.user_id, {
-            attributes: {
-                exclude: ['password']
-            },
-            include: [{
-                model: Post
-            }],
-        });
-        const user = userData.get({
-            plain: true
-        });
-        res.render('dashboard', {
-            ...user,
-            logged_in: true
-        });
-    } catch (err) {
-        res.status(500).json(err);
-    }
-});
-
 //redirect to dashboard once logged in or signed up
 router.get('/login', (req, res) => {
     if (req.session.logged_in) {
@@ -82,12 +32,12 @@ router.get('/login', (req, res) => {
     res.render('login');
 });
 
-router.get('/signUp', (req, res) => {
+router.get('/signup', (req, res) => {
     if (req.session.logged_in) {
         res.redirect('/dashboard');
         return;
     }
-    res.render('signUp');
+    res.render('signup');
 });
 
 module.exports = router;
