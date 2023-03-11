@@ -1,0 +1,26 @@
+<div class='container-lg p-3'>
+
+    <h1>Add Comment</h1>
+
+    <form class='row g-3' id='submit-comment' action='/add' method='POST'>
+        <div class='col-lg-7 p-3'>
+            <label for='date-created'>Date:</label>
+            <input class='form-control' id='date-created' placeholder='MM/DD/YYYY' name='date-created' />
+        </div>
+        <div class='col-lg-7 p-3'>
+            <label for='comment-content'>Comment:</label>
+            <input class='form-control' id='comment-content' placeholder='What do you want your comment to say?'
+                name='comment-content' />
+        </div>
+        <div class='col-lg-7 p-3'>
+            <label for='user-id'>Username:</label>
+            <input class='form-control' id='user-id' placeholder='Username' name='user-id' />
+        </div>
+        <div class='col-lg-7' id='formValidation'></div>
+        <div class='col-lg-7 p-3'>
+            <a href='/viewpost/{{postitem.id}}'><button class='btn primary btn'>Add Comment</button></a>
+        </div>
+    </form>
+</div>
+
+<script src='/js/addcomment.js'></script>

@@ -1,0 +1,16 @@
+    <nav class='nav'>
+        <button class='btn'><a class='nav-link' href='/homepage'>Home</a></button>
+        <button class='btn'><a class='nav-link' href='/login'>Dashboard</a></button>
+        <button class='btn'><a class='nav-link' href='/login'>Login</a></button>
+    </nav>
+
+    {{#each postitems as |postitem|}}
+    <div class="card p-3" style="width: 18rem;">
+        <div class="card-body">
+            <h3 class="titleData card-title" id="{{postitem.title}}">{{postitem.title}}</h3>
+            <p class="card-text contentData" id="{{postitem.post_content}}">{{postitem.post_content}}</p>
+            <p class="card-text userData">Created by {{postitem.user_id}} on {{postitem.date_created}}</p>
+            <p class="d-none idData">{{postitem.id}}</p>
+        </div>
+    </div>
+    {{/each}}

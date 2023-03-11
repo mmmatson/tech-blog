@@ -1,0 +1,20 @@
+<div class='container-lg p-3'>
+    <h2>Update Post</h2>
+    <form id='update-post' class='p-3' method='PUT'>
+        <div class='col-lg-7 p-3'>
+            <label for='title'>Title:</label>
+            <input class='form-control' id='title' value='{{this.title}}' placeholder='Title' name='title' />
+        </div>
+        <div class='col-lg-7 p-3'>
+            <label for='post-content'>Description:</label>
+            <input class='form-control' id='post-content' value='{{this.post_content}}'
+                placeholder='What do you want your post to be about?' name='post-content' />
+        </div>
+        <div class='col-lg-7' id='formValidation'></div>
+        <div class='col-lg-7 p-3'>
+            <button class='btn primary btn' id='update-postBtn'>Update</button>
+        </div>
+    </form>
+</div>
+
+<script src='/js/updatepost.js'></script>

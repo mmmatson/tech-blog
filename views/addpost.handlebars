@@ -1,0 +1,30 @@
+<div class='container-lg p-3'>
+
+    <h1>Add Post</h1>
+
+    <form class='row g-3' id='submit-post' action='/add' method='POST'>
+        <div class='col-lg-7 p-3'>
+            <label for='date-created'>Date:</label>
+            <input class='form-control' id='date-created' placeholder='MM/DD/YYYY' name='date-created' />
+        </div>
+        <div class='col-lg-7 p-3'>
+            <label for='title'>Title:</label>
+            <input class='form-control' id='title' placeholder='Post title' name='title' />
+        </div>
+        <div class='col-lg-7 p-3'>
+            <label for='post-content'>Description:</label>
+            <input class='form-control' id='post-content' placeholder='What is your post about?'
+                name='post-content' />
+        </div>
+        <div class='col-lg-7 p-3'>
+            <label for='user-id'>Username:</label>
+            <input class='form-control' id='user-id' placeholder='Username' name='user-id' />
+        </div>
+        <div class='col-lg-7' id='formValidation'></div>
+        <div class='col-lg-7 p-3'>
+            <a href='/dashboard'><button class='btn primary btn'>Add Post</button></a>
+        </div>
+    </form>
+</div>
+
+<script src='/js/addpost.js'></script>

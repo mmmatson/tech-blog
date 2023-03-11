@@ -1,0 +1,36 @@
+<nav class='nav'>
+    <button class='btn'><a class='nav-link' href='/dashboard'>Home</a></button>
+    <button class='btn'><a class='nav-link' href='/dashboard'>Dashboard</a></button>
+    <button class='btn'><a class='nav-link' href='/homepage' id='logout' type='submit'>Log Out</a></button>
+</nav>
+
+<div class="post">
+    <div class="card p-3" style="width: 18rem;">
+        <div class="card-body">
+            <h2 class="titleData card-title" id="{{postitem.title}}">{{postitem.title}}</h2>
+            <p class="card-text contentData" id="{{postitem.post_content}}">{{postitem.post_content}}</p>
+            <p class="card-text userData">Created by {{postitem.user_id}} on {{postitem.date_created}}</p>
+            <p class="d-none idData">{{postitem.id}}</p>
+        </div>
+    </div>
+
+    <div class="comments">
+        {{#each commentitems as |commentitem|}}
+        <div class="card p-3" style="width: 18rem;">
+            <div class="card-body">
+                <h3 class="card-title" id="{{commentitem.title}}">{{commentitem.title}}</h3>
+                <p class="card-text contentData" id="{{commentitem.comment_content}}">{{commentitem.comment_content}}
+                </p>
+                <p class="card-text">Created by {{commentitem.user_id}} on {{commentitem.date_created}}</p>
+                <p class="d-none idData">{{commentitem.id}}</p>
+            </div>
+        </div>
+        {{/each}}
+    </div>
+
+    <div class="p-3">
+        <a href='/addcomment'><button class='btn primary-btn' id='addcomment'>New
+                Comment</button></a>
+    </div>
+
+    <script src='/js/addcomment.js'></script>
