@@ -22,7 +22,7 @@ router.get('/', withAuth, (req, res) => {
         });
 });
 
-router.get('/:id', async (req, res) => {
+router.get('/:id', withAuth, async (req, res) => {
     try {
         const postData = await Post.findByPk(req.params.id, {
             attributes: ['id', 'title', 'post_content', 'date_created', "user_id"],
@@ -33,16 +33,16 @@ router.get('/:id', async (req, res) => {
                 }
             ],
         });
-        const post = postData.get({
+        const postitem = postData.get({
             plain: true
         });
-        res.render('viewpost', { post, logged_in: req.session.logged_in });
+        res.render('viewpost', { postitem, logged_in: req.session.logged_in });
     } catch (err) {
         res.status(500).json(err);
     }
 });
 
-router.get('/addpost', (req, res) => {
+router.get('/addpost', withAuth, (req, res) => {
     res.render('addpost');
 });
 
