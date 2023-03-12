@@ -5,14 +5,14 @@ const addPostFormHandler = async (event) => {
     const post_content = document.querySelector('#post-content').value.trim();
   
     if (title && post_content) {
-      const response = await fetch('/api/posts', {
+      const response = await fetch('/api/post', {
         method: 'POST',
         body: JSON.stringify({ title, post_content }),
         headers: { 'Content-Type': 'application/json' },
       });
   
       if (response.ok) {
-        document.location.replace('/dashboard');
+        document.location.reload();
       } else {
         document.getElementById('formValidation').innerHTML = `
         <div class="alert alert-danger" role="alert">Failed to add post.</div>`;      }

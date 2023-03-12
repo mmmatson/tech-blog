@@ -7,7 +7,7 @@ router.get('/', (req, res) => {
           attributes: ['id',
               'title',
               'post_content',
-              'created_at',
+              'created_at'
           ],
           include: [{
                   model: User,
@@ -26,23 +26,23 @@ router.get('/', (req, res) => {
       .then(postData => res.json(postData.reverse()))
       .catch(err => {
           console.log(err);
-          res.status(400).json(err);
+          res.status(500).json(err);
       });
-    })
 
-    router.post('/', withAuth, (req, res) => {
+});
+
+  router.post('/', withAuth, (req, res) => {
     Post.create({
-      title: req.body.title,
-      post_content: req.body.post_content,
-      user_id: req.session.user_id,
-    })
-      .then((postData) => {
-        res.status(200).json(postData);
-      })
-      .catch((err) => {
-        res.status(400).json(err);
-      });
-  });
+            title: req.body.title,
+            post_content: req.body.content,
+            user_id: req.session.user_id
+        })
+        .then(postData => res.json(postData))
+        .catch(err => {
+            console.log(err);
+            res.status(500).json(err);
+        });
+});
 
 router.put('/:id', withAuth, async (req, res) => {
     const postData = await Post.update(

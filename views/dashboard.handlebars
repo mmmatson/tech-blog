@@ -22,10 +22,37 @@
     </div>
     {{/each}}
 
-    <div class="p-3">
-        <a href='/dashboard/addpost'><button class='btn primary-btn' id='addpost'>New
+    <h4>Add Post</h4>
+
+    <form class='row g-3' id='submit-post'>
+        {{!-- <div class='col-lg-7 p-3'>
+            <label for='date-created'>Date:</label>
+            <input class='form-control' id='date-created' placeholder='MM/DD/YYYY' name='date-created' />
+        </div> --}}
+        <div class='col-lg-7 p-3'>
+            <label for='title'>Title:</label>
+            <input class='form-control' id='title' placeholder='title' name='title' />
+        </div>
+        <div class='col-lg-7 p-3'>
+            <label for='post-content'>Description:</label>
+            <input class='form-control' id='post-content' placeholder='What is your post about?'
+                name='post-content' />
+        </div>
+        {{!-- <div class='col-lg-7 p-3'>
+            <label for='user-id'>Username:</label>
+            <input class='form-control' id='user-id' placeholder='Username' name='user-id' />
+        </div> --}}
+        <div class='col-lg-7' id='formValidation'></div>
+        <div class='col-lg-7 p-3'>
+            <a href='dashboard'><button class='btn primary btn'>Add Post</button></a>
+        </div>
+    </form>
+</div>
+
+    {{!-- <div class="p-3">
+        <a href='dashboard/addpost'><button class='btn primary-btn' id='addpost'>New
                 Post</button></a>
-    </div>
+    </div> --}}
 
     <script src='/js/viewpost.js'></script>
     <script src='/js/updatepost.js'></script>

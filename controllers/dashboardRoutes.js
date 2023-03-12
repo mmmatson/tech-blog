@@ -3,36 +3,77 @@ const { Post, User, Comment } = require("../models");
 const withAuth = require("../utils/auth");
 
 //if logged-in render all posts on the dashboard page
-router.get('/', (req, res) => {
+// router.get('/', (req, res) => {
+//     Post.findAll({
+//         attributes: ['id', 'title', 'post_content', 'date_created'],
+//         include: [{
+//             model: User,
+//             attributes: ['username'],
+//         },],
+//     })
+//         .then(postData => {
+//             const posts = postData.map((post) => post.get({
+//                 plain: true
+//             }));
+//             res.render('dashboard', {
+//                 posts,
+//                 logged_in: req.session.logged_in
+//             });
+//         })
+//         .catch(err => {
+//             console.log(err);
+//             res.status(500).json(err);
+//         })
+// });
+router.get('/', withAuth, (req, res) => {
     Post.findAll({
-        attributes: ['id', 'title', 'post_content', 'date_created'],
-        include: [{
-            model: Comment,
-            attributes: ['id', 'comment_text', 'post_id', 'user_id', 'date_created'],
-            include: {
-                model: User,
-                attributes: ['username']
-            }
-        }],
-        include: [{
+        attributes: ['id', 'post_content', 'user_id', 'date_created'],
+        include: {
             model: User,
-            attributes: ['username'],
-        },],
+            attributes: ['username']
+        }
     })
-        .then(postData => {
-            const posts = postData.map((post) => post.get({
-                plain: true
-            }));
-            res.render('dashboard', {
-                posts,
-                logged_in: req.session.logged_in
+        .then((postData) => {
+            const postitems = postData.map((postitems) =>
+                postitems.get({ plain: true })
+            );
+            res.render('dashboard', { postitems, logged_in: req.session.logged_in
             });
         })
-        .catch(err => {
-            console.log(err);
+        .catch((err) => {
             res.status(500).json(err);
-        })
+        });
 });
+
+
+// Post.findAll({
+//     attributes: ['id', 'title', 'post_content', 'date_created'],
+//     include: [{
+//         model: Comment,
+//         attributes: ['id', 'comment_content', 'post_id', 'user_id', 'date_created'],
+//         include: {
+//             model: User,
+//             attributes: ['username']
+//         }
+//     }],
+//     include: [{
+//         model: User,
+//         attributes: ['username'],
+//     },],
+// })
+//     .then(postData => {
+//         const posts = postData.map((post) => post.get({
+//             plain: true
+//         }));
+//         res.render('homepage', {
+//             posts,
+//             logged_in: req.session.logged_in
+//         });
+//     })
+//     .catch(err => {
+//         console.log(err);
+//         res.status(500).json(err);
+//     })
 
 router.get('/:id', async (req, res) => {
     try {
@@ -41,13 +82,6 @@ router.get('/:id', async (req, res) => {
             include: [
                 {
                     model: User,
-                    attributes: ['username'],
-                }, {
-                    model: Comment,
-                    attributes: ['id', 'comment_content', 'date_created', 'post_id', 'user_id'],
-                    include: [
-                        User
-                    ],
                     attributes: ['username'],
                 }
             ],

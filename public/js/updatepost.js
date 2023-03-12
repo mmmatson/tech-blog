@@ -6,7 +6,7 @@ const updatePostFormHandler = async (event) => {
     const id = location.pathname.split('/')[2];
 
     if (title && post_content) {
-        const response = await fetch(`/api/posts/${id}`, {
+        const response = await fetch(`/api/post/${id}`, {
             method: 'PUT',
             body: JSON.stringify({ post_id: id, title, post_content }),
             headers: { 'Content-Type': 'application/json' },

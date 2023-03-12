@@ -4,33 +4,21 @@ const withAuth = require('../utils/auth');
 
 router.get('/', (req, res) => {
     Post.findAll({
-        attributes: ['id', 'title', 'post_content', 'date_created'],
-        include: [{
-            model: Comment,
-            attributes: ['id', 'comment_text', 'post_id', 'user_id', 'date_created'],
-            include: {
-                model: User,
-                attributes: ['username']
-            }
-        }],
-        include: [{
+        attributes: ['id', 'post_content', 'user_id', 'date_created'],
+        include: {
             model: User,
-            attributes: ['username'],
-        },],
+            attributes: ['username']
+        }
     })
-        .then(postData => {
-            const posts = postData.map((post) => post.get({
-                plain: true
-            }));
-            res.render('homepage', {
-                posts,
-                logged_in: req.session.logged_in
-            });
+        .then((postData) => {
+            const postitems = postData.map((postitems) =>
+                postitems.get({ plain: true })
+            );
+            res.render('homepage', { postitems });
         })
-        .catch(err => {
-            console.log(err);
+        .catch((err) => {
             res.status(500).json(err);
-        })
+        });
 });
 
 router.get('/login', (req, res) => {
