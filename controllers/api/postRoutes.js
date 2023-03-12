@@ -31,17 +31,18 @@ router.get('/', (req, res) => {
 
 });
 
-  router.post('/', withAuth, (req, res) => {
-    Post.create({
-            title: req.body.title,
-            post_content: req.body.content,
-            user_id: req.session.user_id
-        })
-        .then(postData => res.json(postData))
-        .catch(err => {
-            console.log(err);
-            res.status(500).json(err);
-        });
+router.post('/add', (req, res) => {
+  Post.create({
+    title: req.body.title,
+    post_content: req.body.content,
+    user_id: req.session.user_id
+  })
+    .then((post) => {
+      res.status(200).json(post);
+    })
+    .catch((err) => {
+      res.status(400).json(err);
+    });
 });
 
 router.put('/:id', withAuth, async (req, res) => {
