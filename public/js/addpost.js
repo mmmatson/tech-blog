@@ -3,23 +3,21 @@ const addPostFormHandler = async (event) => {
   
     const title = document.querySelector('#title').value.trim();
     const post_content = document.querySelector('#post-content').value.trim();
-    const date_created = document.querySelector('#date-created').value.trim();
-    const user_id = document.querySelector('#user-id').value.trim();
   
-    if (title && post_content && date_created && user_id) {
-      const response = await fetch('/api/post/add', {
+    if (title && post_content) {
+      const response = await fetch('/api/posts', {
         method: 'POST',
-        body: JSON.stringify({ title, post_content, date_created, user_id }),
+        body: JSON.stringify({ title, post_content }),
         headers: { 'Content-Type': 'application/json' },
       });
   
       if (response.ok) {
         document.location.replace('/dashboard');
       } else {
-        alert('Failed to add post.');
-      }
+        document.getElementById('formValidation').innerHTML = `
+        <div class="alert alert-danger" role="alert">Failed to add post.</div>`;      }
     }
-    if (title === '' || post_content === '' || date_created === '' || user_id === '') {
+    if (title === '' || post_content === '') {
       document.getElementById('formValidation').innerHTML = `
           <div class="alert alert-danger" role="alert">
           You must fill out all required fields on the form. 

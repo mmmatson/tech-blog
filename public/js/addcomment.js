@@ -2,13 +2,12 @@ const addCommentFormHandler = async (event) => {
     event.preventDefault();
   
     const comment_content = document.querySelector('#comment-content').value.trim();
-    const date_created = document.querySelector('#date-created').value.trim();
-    const user_id = document.querySelector('#user-id').value.trim();
-  
-    if (date_created && comment_content && user_id) {
-      const response = await fetch('/api/comment/add', {
+    const id = location.pathname.split('/')[2];
+
+    if (comment_content) {
+      const response = await fetch('/api/comment', {
         method: 'POST',
-        body: JSON.stringify({ comment_content, date_created, user_id }),
+        body: JSON.stringify({ post_id: id, comment_content }),
         headers: { 'Content-Type': 'application/json' },
       });
   
@@ -18,7 +17,7 @@ const addCommentFormHandler = async (event) => {
         alert('Failed to add comment.');
       }
     }
-    if (comment_content === '' || date_created === '' || user_id === '') {
+    if (comment_content === '') {
       document.getElementById('formValidation').innerHTML = `
           <div class="alert alert-danger" role="alert">
           You must fill out all required fields on the form. 
