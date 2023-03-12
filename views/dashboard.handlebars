@@ -24,14 +24,14 @@
 
     <h4>Add Post</h4>
 
-    <form class='row g-3' id='submit-post'>
+    <form class='row g-3' id='submit-post' action='/add' method='POST'>
         {{!-- <div class='col-lg-7 p-3'>
             <label for='date-created'>Date:</label>
             <input class='form-control' id='date-created' placeholder='MM/DD/YYYY' name='date-created' />
         </div> --}}
         <div class='col-lg-7 p-3'>
             <label for='title'>Title:</label>
-            <input class='form-control' id='title' placeholder='title' name='title' />
+            <input class='form-control' id='title' placeholder='Title' name='title' />
         </div>
         <div class='col-lg-7 p-3'>
             <label for='post-content'>Description:</label>
@@ -44,7 +44,7 @@
         </div> --}}
         <div class='col-lg-7' id='formValidation'></div>
         <div class='col-lg-7 p-3'>
-            <a href='dashboard'><button class='btn primary btn'>Add Post</button></a>
+            <button id="add-post" class='btn primary btn'>Add Post</button>
         </div>
     </form>
 </div>

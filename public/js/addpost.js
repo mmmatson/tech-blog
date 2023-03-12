@@ -5,7 +5,7 @@ const addPostFormHandler = async (event) => {
     const post_content = document.querySelector('#post-content').value.trim();
   
     if (title && post_content) {
-      const response = await fetch('/api/post', {
+      const response = await fetch('/api/post/add', {
         method: 'POST',
         body: JSON.stringify({ title, post_content }),
         headers: { 'Content-Type': 'application/json' },
@@ -25,6 +25,5 @@ const addPostFormHandler = async (event) => {
     }
   };
   
-  document
-    .querySelector('#submit-post')
-    .addEventListener('submit', addPostFormHandler);
+  const addButton = document.getElementById('add-post');
+  addButton.addEventListener('click', addPostFormHandler);
